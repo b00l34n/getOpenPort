@@ -1,0 +1,88 @@
+#!/bin/sh
+#
+# getPort.sh: is basicly a wraper for the python-script that's doing the 
+#             actual work
+# 
+# Author: b00l34n 
+#         
+# Ver.: 1.0
+
+##
+# prints usage to sdtout
+#
+# @stdout usage
+usage() {
+  cat << EOT
+Usage:
+getPort.sh -h | getPort.sh --help
+
+  prints this help and exits
+
+getPort.sh [MODE] 
+
+  MODE lets you select between Snapshot- and Loop- Mode.
+       If it is left blank, it will start in Loop-Mode
+       by default.
+
+  -c, --clean-loop    cleans the screen and then constantly prints a list of 
+                      all open ports in an interval of 3 seconds 
+
+  -l, --loop          constantly prints a list of all open ports in an interval
+                      of 3 seconds  
+
+  -s, --snap          prints a "snapshot" of the curten open ports
+EOT
+}
+
+##
+# this fuktions prints an error-masage than the usage and exits the script
+# with a given error-code
+# 
+# @$1     : the error-code the script should return
+# @$2     : the error-masage printet befor the usage
+# @stderr : error-masage and usage
+# @return : exit-code
+errorExit(){
+  echo "$2" >&2
+  usage >&2
+  exit "$1"
+}
+
+##
+# starts the python-skritp in one of the two modes
+#
+# @$1 : the MODE-Argument {-l / -s}
+getOpenPorts(){
+  python ~/.opt/share/getPort/getPortFormatet.py "$1"
+}
+
+### MAIN SEGMENT ###
+case $# in 
+  0) # if no argument is given  
+    getOpenPorts -c  # start the python-skript in loop mode
+  ;; 
+  
+  1) # if the one possible argument is given
+    case $1 in 
+      "-h" | "--help")
+        usage
+        exit 0
+      ;; 
+      "-c" | "--clean-loop")
+        getOpenPorts -c
+      ;;
+      "-s" | "--snap")
+        getOpenPorts -s
+      ;;
+      "-l" | "--loop")
+        getOpenPorts -l
+      ;;
+      *)
+        errorExit 169 "=== ERROR: WRONG ARGUMENTS ==="
+      ;;
+    esac
+  ;;
+  *) # if there are more then one argument given 
+    errorExit 142 "=== ERROR: TOO MANY ARGUMENTS ==="
+  ;;
+esac
