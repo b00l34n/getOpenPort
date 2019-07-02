@@ -60,4 +60,4 @@ help:
 	@echo "	uninstall - removes all the skripts out of the system files"
 	@echo "	check     - checks if the python version is right"
 	@echo "	help      - display this help and exit"
-
+	@echo ""
