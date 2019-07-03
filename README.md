@@ -1,7 +1,7 @@
 # getOpenPort
 
-this is a little python-skript with a shell-skript as starter to show all open tcp and udp ports
-with the PID and Name of the Software, the port belongs to.
+this is a little python-skript, with a shell-skript as a starter, will show all open tcp and udp ports
+with the PID and Name of the Software, each port belongs to.
 It uses the bsd version of "netstat" for the general information, and the python-skript to format
 the output nicely. I recomend using python 3.7.3, because it's what i used to "develop" the skript
 
