@@ -27,9 +27,9 @@ endif
 
 install: check
 ifeq "$(GOO)" "0"
-	sudo cp -r ./share/* /usr/share 
-	sudo cp -r ./bin/* /usr/share/getOpenPort 
-	sudo ln /usr/bin/getOpenPort /usr/share/getOpenPort.sh
+	cp -r ./share/* /usr/share 
+	cp -r ./bin/* /usr/share/getOpenPort 
+	ln /usr/bin/getOpenPort /usr/share/getOpenPort.sh
 	@echo -e "[  \e[1;32mOK\e[0m  ] Installing files"	
 else
 	@echo -e "[ \e[1;31mFAIL\e[0m ] Installing files" >&2
@@ -37,8 +37,8 @@ else
 endif
 
 uninstall:
-	sudo rm -rf /usr/share/getOpenPort
-	sudo rm /usr/bin/getOpenPort
+	rm -rf /usr/share/getOpenPort
+	rm /usr/bin/getOpenPort
 ifneq "$(shell ls /usr/bin | grep 'getOpenPort')" "getOpenPort"
 	@echo -e "[  \e[1;32mOK\e[0m  ] removed starer-skript"		
 else
