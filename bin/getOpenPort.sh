@@ -53,7 +53,8 @@ errorExit(){
 #
 # @$1 : the MODE-Argument {-l / -s}
 getOpenPorts(){
-  python ~/.opt/share/getPort/getPortFormatet.py "$1"
+	
+  python /usr/share/getOpenPort/getPortFormatet.py "$1"
 }
 
 ### MAIN SEGMENT ###

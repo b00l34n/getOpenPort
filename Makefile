@@ -4,7 +4,7 @@
 # b00l34n					#
 #						#
 # Makefile                                      #
-# version: 0.1 					#
+# version: 1.1 					#
 # --------------------------------------------- #
 
 NEEDED_PY_VERSION= Python 3.7.3
@@ -18,23 +18,20 @@ default: install
 
 check:
 ifeq "$(shell python -V)" "Python 3.7.3"
-	@GOO=0
 	@echo -e "[  \e[1;32mOK\e[0m  ] Checking for dependencies"		
 else
 	@echo -e "[ \e[1;31mFAIL\e[0m ] Checking for dependencies" >&2
-	@echo "         Make sure you are using the Python Version 3.7.3" >&2	
+	@echo "         Make sure you are using the Python Version 3.7.3" >&2
+	@exit 1	
 endif
 
 install: check
-ifeq "$(GOO)" "0"
-	cp -r ./share/* /usr/share 
-	cp -r ./bin/* /usr/share/getOpenPort 
-	ln /usr/bin/getOpenPort /usr/share/getOpenPort.sh
+	@sudo cp -r ./share/* /usr/share 
+	@sudo cp -r ./bin/* /usr/share/getOpenPort
+	#@sudo ln /usr/share/getOpenPort/getOpenPort.sh /usr/bin/getOpenPort
+	@sudo chown $(shell whoami) /usr/bin/getOpenPort
+	@chmod 744 /usr/bin/getOpenPort
 	@echo -e "[  \e[1;32mOK\e[0m  ] Installing files"	
-else
-	@echo -e "[ \e[1;31mFAIL\e[0m ] Installing files" >&2
-	@echo "         Make sure you are root while installing!">&2
-endif
 
 uninstall:
 	rm -rf /usr/share/getOpenPort
@@ -61,3 +58,7 @@ help:
 	@echo "	check     - checks if the python version is right"
 	@echo "	help      - display this help and exit"
 	@echo ""
+
+debug:
+	@echo "= GET_PYTHON_VERSION:\n	 =" 
+	$(GET_PY_VERSION)
