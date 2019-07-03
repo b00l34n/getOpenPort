@@ -26,7 +26,7 @@ else
 endif
 
 install: check
-ifdef $(GOO)
+ifeq "$(GOO)" "0"
 	sudo cp -r ./share/* /usr/share 
 	sudo cp -r ./bin/* /usr/share/getOpenPort 
 	sudo ln /usr/bin/getOpenPort /usr/share/getOpenPort.sh
