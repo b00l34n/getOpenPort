@@ -12,7 +12,7 @@ INSTALLDIR        = /usr
 NEEDED_PY_VERSION = Python 3.7.3
 GET_PY_VERSION    = $(shell python -V)
 
-.PHONY: install uninstall check help
+.PHONY: build install uninstall check clean help
 .SUFFIXES: .py .sh .head .body
 .SECONDARY:
 
@@ -56,6 +56,9 @@ else
 	@echo "         Make sure you are root while uninstalling!">&2
 endif
 
+clean:
+	@rm -rf ./bin
+
 help:
 	@echo "Makefile to install the getOpenPort Skripts."
 	@echo ""
@@ -64,9 +67,12 @@ help:
 	@echo "                (default=/usr)"
 	@echo ""
 	@echo "TARGETS"
+	@echo "	check        - checks if the python version is right"
+	@echo "	build        - puts the starter script together and 
+	@echo "                puts it into ./bin"
 	@echo "	install      - checks the python version and installs the skripts"
 	@echo "	uninstall    - removes all the skripts out of the system files"
-	@echo "	check        - checks if the python version is right"
+	@echo "	clean        - removes the ./bin and the files inside it"
 	@echo "	help         - display this help and exit"
 	@echo ""
 
