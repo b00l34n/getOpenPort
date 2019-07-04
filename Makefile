@@ -28,6 +28,7 @@ else
 endif
 
 build:
+	@mkdir ./bin
 	@cat ./src/starter.head > ./bin/getOpenPort.sh
 	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
 	@cat ./src/starter.body >> ./bin/getOpenPort.sh
