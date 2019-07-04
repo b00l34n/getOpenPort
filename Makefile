@@ -2,9 +2,9 @@
 # getOpenPort                                   #
 # installation file                             #
 # b00l34n                                       #
-#						                                    #
+#                                               #
 # Makefile                                      #
-# version: 1.1 					                        #
+# version: 1.1                                  #
 # --------------------------------------------- #
 
 INSTALLDIR        = /usr
