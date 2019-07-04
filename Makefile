@@ -13,10 +13,10 @@ NEEDED_PY_VERSION = Python 3.7.3
 GET_PY_VERSION    = $(shell python -V)
 
 .PHONY: install uninstall check help
-.SUFFIXES: .py .sh
+.SUFFIXES: .py .sh .head .body
 .SECONDARY:
 
-default: install 
+default: build 
 
 check:
 ifeq "$(shell python -V)" "Python 3.7.3"
@@ -27,11 +27,16 @@ else
 	@exit 1	
 endif
 
+build:
+	@cat ./src/starter.head > ./bin/getOpenPort.sh
+	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
+	@cat ./src/starter.body >> ./bin/getOpenPort.sh
+
 install: check
 	@cp -r ./share/* $(INSTALLDIR)/share 
 	@cp -r ./bin/* $(INSTALLDIR)/share/getOpenPort
-	@ln /usr/share/getOpenPort/getOpenPort.sh /usr/bin/getOpenPort
-	@chmod 747 /usr/bin/getOpenPort
+	@ln $(INSTALLDIR)/share/getOpenPort/getOpenPort.sh $(INSTALLDIR)/bin/getOpenPort
+	@chmod 747 $(INSTALLDIR)/bin/getOpenPort
 	@echo -e "[  \e[1;32mOK\e[0m  ] Installing files"	
 
 uninstall:

@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# getPort.sh: is basicly a wraper for the python-script that's doing the 
+#             actual work
+# 
+# Author: b00l34n 
+#         
+# Ver.: 1.1
