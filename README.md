@@ -13,7 +13,11 @@ execute "make" to build the starter script and "make install" to copy all the di
 "make INSTALLDIR=/path/you/want"
 "make install INSTALLDIR=/path/you/want"
 
+## removel:
+it works just like the installation, just without the building part. That means, you need to set the
+INSTALLDIR if you set it for the installation
 
+## BTW:
 If you have any recommendations on how to improve this project or how to improve my code quality in 
 general, please let me know.
 I am more then happy to receive some tipps from pros!
