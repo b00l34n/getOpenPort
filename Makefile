@@ -27,11 +27,19 @@ else
 	@exit 1	
 endif
 
-build:
+build: 
 	@mkdir ./bin
 	@cat ./src/starter.head > ./bin/getOpenPort.sh
 	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
 	@cat ./src/starter.body >> ./bin/getOpenPort.sh
+	@if [ -e  ./bin/getOpenPort.sh ]; then
+		@echo -e "[  \e[1;32mOK\e[0m  ] Building starter"
+	@else
+		@echo -e "[ \e[1;31mFAIL\e[0m ] Building starter" >&2
+		@echo "         Starter was not build. Make sure you have the right " >&2
+		@echo "         permisions to write in this directory " >&2
+	@fi
+
 
 install: check
 	@cp -r ./share/* $(INSTALLDIR)/share 
