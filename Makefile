@@ -24,6 +24,7 @@ build:
 	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
 	@cat ./src/starter.body >> ./bin/getOpenPort.sh
 
+
 check:
 ifeq "$(shell python -V)" "Python 3.7.3"
 	@echo -e "[  \e[1;32mOK\e[0m  ] Checking for dependencies"		
@@ -32,14 +33,7 @@ else
 	@echo "         Make sure you are using the Python Version 3.7.3" >&2
 	@exit 1	
 endif
-ifeq "$(shell ls ./bin)" "getOpenPort.sh"
-	@echo -e "[  \e[1;32mOK\e[0m  ] Building starter"
-else
-	@echo -e "[ \e[1;31mFAIL\e[0m ] Building starter" >&2
-	@echo "         Starter was not build. Make sure you have the right " >&2
-	@echo "         permisions to write in this directory " >&2
-endif
-
+	
 install: check
 	@cp -r ./share/* $(INSTALLDIR)/share 
 	@cp -r ./bin/* $(INSTALLDIR)/share/getOpenPort
@@ -48,18 +42,18 @@ install: check
 	@echo -e "[  \e[1;32mOK\e[0m  ] Installing files"	
 
 uninstall:
-	rm -rf $(INSTALLDIR)/share/getOpenPort
-	rm $(INSTALLDIR)/bin/getOpenPort
-ifneq "$(shell ls $(INSTALLDIR)/bin | grep 'getOpenPort')" "getOpenPort"
-	@echo -e "[  \e[1;32mOK\e[0m  ] removed starer-skript"		
-else
-	@echo -e "[ \e[1;31mFAIL\e[0m ] removed starer-skript" >&2
-	@echo "         Make sure you are root while uninstalling!">&2
-endif
-ifneq "$(shell ls $(INSTALLDIR)/share | grep 'getOpenPort')" "getOpenPort"
+	@rm -rf $(INSTALLDIR)/share/getOpenPort
+ifneq "$(shell ls $(INSTALLDIR)/share | grep 'getOpenPort')" "getOpenPort\n"
 	@echo -e "[  \e[1;32mOK\e[0m  ] removed python-skript"		
 else
 	@echo -e "[ \e[1;31mFAIL\e[0m ] removed python-skript" >&2
+	@echo "         Make sure you are root while uninstalling!">&2
+endif
+	@rm $(INSTALLDIR)/bin/getOpenPort
+ifneq "$(shell ls $(INSTALLDIR)/bin | grep 'getOpenPort')" "getOpenPort\n"
+	@echo -e "[  \e[1;32mOK\e[0m  ] removed starer-skript"		
+else
+	@echo -e "[ \e[1;31mFAIL\e[0m ] removed starer-skript" >&2
 	@echo "         Make sure you are root while uninstalling!">&2
 endif
 
