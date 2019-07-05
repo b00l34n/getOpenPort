@@ -18,6 +18,12 @@ GET_PY_VERSION    = $(shell python -V)
 
 default: build 
 
+build: 
+	@mkdir ./bin
+	@cat ./src/starter.head > ./bin/getOpenPort.sh
+	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
+	@cat ./src/starter.body >> ./bin/getOpenPort.sh
+
 check:
 ifeq "$(shell python -V)" "Python 3.7.3"
 	@echo -e "[  \e[1;32mOK\e[0m  ] Checking for dependencies"		
@@ -26,20 +32,13 @@ else
 	@echo "         Make sure you are using the Python Version 3.7.3" >&2
 	@exit 1	
 endif
-
-build: 
-	@mkdir ./bin
-	@cat ./src/starter.head > ./bin/getOpenPort.sh
-	@echo "INSTALLDIR="$(INSTALLDIR) >> ./bin/getOpenPort.sh
-	@cat ./src/starter.body >> ./bin/getOpenPort.sh
-	@if [ -e  ./bin/getOpenPort.sh ]; then
-		@echo -e "[  \e[1;32mOK\e[0m  ] Building starter"
-	@else
-		@echo -e "[ \e[1;31mFAIL\e[0m ] Building starter" >&2
-		@echo "         Starter was not build. Make sure you have the right " >&2
-		@echo "         permisions to write in this directory " >&2
-	@fi
-
+ifeq "$(shell ls ./bin)" "getOpenPort.sh"
+	@echo -e "[  \e[1;32mOK\e[0m  ] Building starter"
+else
+	@echo -e "[ \e[1;31mFAIL\e[0m ] Building starter" >&2
+	@echo "         Starter was not build. Make sure you have the right " >&2
+	@echo "         permisions to write in this directory " >&2
+endif
 
 install: check
 	@cp -r ./share/* $(INSTALLDIR)/share 
