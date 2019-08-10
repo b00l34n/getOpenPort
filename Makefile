@@ -9,7 +9,7 @@
 
 INSTALLDIR        = /usr
 
-NEEDED_PY_VERSION = Python 3.7.3
+NEEDED_PY_VERSION = Python 3.7.4
 GET_PY_VERSION    = $(shell python -V)
 
 .PHONY: build install uninstall check clean help
@@ -26,11 +26,11 @@ build:
 
 
 check:
-ifeq "$(shell python -V)" "Python 3.7.3"
+ifeq "$(shell python -V)" "Python 3.7.4"
 	@echo -e "[  \e[1;32mOK\e[0m  ] Checking for dependencies"		
 else
 	@echo -e "[ \e[1;31mFAIL\e[0m ] Checking for dependencies" >&2
-	@echo "         Make sure you are using the Python Version 3.7.3" >&2
+	@echo "         Make sure you are using the Python Version 3.7.4" >&2
 	@exit 1	
 endif
 	

@@ -3,7 +3,9 @@
 This is a little python-script, with a shell-script as a starter, will show all open TCP and UDP ports
 with the PID and name of the software, each port belongs to.
 It uses the BSD version of "netstat" for the general information, and the python-script to format
-the output nicely. I recommend using python 3.7.3, because it's what I used to develop the skript
+the output nicely. I recommend using python 3.7.3, because it's what I used to develop the skript.
+
+Python got updated to 3.7.4. But, dont worry, it still works. I just had to eddit the Makefile a bit.
 
 ## installation:
 execute "make" to build the starter script and "make install" to copy all the directory strucktur to 
